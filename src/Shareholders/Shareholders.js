@@ -22,7 +22,7 @@ function Shareholders({shareholders, baseUrl}) {
                         shareholders.content.map((shareholder, index) => (
                             <div key={index} className="col-2 icon-block icon-top wow fadeInUp" data-wow-delay="0.1s">
                                 <div className="icon">
-                                    <img className='headshot-image' src={baseUrl + shareholder.image} alt={shareholder.name}/>
+                                    <img className='headshot-image' src={shareholder.image} alt={shareholder.name}/>
                                 </div>
                                 <div className="icon-block-description">
                                     <h4>{shareholder.name}</h4>
