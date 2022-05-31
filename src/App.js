@@ -10,6 +10,7 @@ import Footer from './Footer';
 import Gallery from './Gallery';
 import Shareholders from './Shareholders/Shareholders';
 import axios from 'axios';
+import VideoLinks from './VideoLinks';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
   const [children, setChildren] = useState({});
   const [donate, setDonate] = useState({});
   const [feedback, setFeedback] = useState({});
+  const [videoHeader, setVideoHeader] = useState({});
 
   const fetchData = async () => {
 
@@ -76,6 +78,17 @@ function App() {
         alt:img.attributes.description
       }
     )));
+
+    //Get Videos header
+    res = await axios.get(baseUrl + '/api/videos-header');
+    console.log(res)
+    setVideoHeader({
+      title: res.data.data.attributes.title,
+      header: res.data.data.attributes.header,
+      description: res.data.data.attributes.description,
+      results: res.data.data.attributes.number_of_results,
+      moreVideos: res.data.data.attributes.more_videos_text,
+    })
 
     //Get Admissions content
     res = await axios.get(baseUrl + '/api/admissions-header');
@@ -159,6 +172,7 @@ function App() {
             <About about={about} />
             <Shareholders shareholders={shareholders} baseUrl={baseUrl} />
             <Gallery images={galleryImages} baseUrl={baseUrl} />
+            <VideoLinks videoHeader={videoHeader} />
             <Admissions admissions={admissions} />
             <Children children={children} />
             <Donate donate={donate} />

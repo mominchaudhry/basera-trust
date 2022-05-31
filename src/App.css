@@ -62,3 +62,31 @@
 .headshot-image {
   width: 200px;
 }
+
+.video {
+  margin: 5px 25px 5px 25px;
+}
+
+.video-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.responsive-flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.youtube-link {
+  margin: auto;
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+@media (max-width: 480px) {
+
+  .responsive-flex {
+    flex-direction: column;
+  }
+
+}
