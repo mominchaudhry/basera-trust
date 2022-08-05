@@ -83,7 +83,37 @@
   padding-bottom: 50px;
 }
 
+.shareholders {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.teamCard {
+  height: 320px;
+  width: 250px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+}
+
+.teamCard img {
+  height: 200px;
+  width: auto;
+}
+
+.img-icon {
+  display: flex;
+  justify-content: center;
+}
+
 @media (max-width: 480px) {
+
+  .shareholders {
+    width: 100%;
+  }
 
   .responsive-flex {
     flex-direction: column;
