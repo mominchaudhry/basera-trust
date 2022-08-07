@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Banner({banner}) {
+
+    const [open, setOpen] = useState(false);
 
   return (
     <header id="banner" className="scrollto clearfix" data-enllax-ratio=".5">
@@ -75,8 +77,35 @@ function Banner({banner}) {
                       </ul>
                   </nav>
                    
-                  <div id="nav-trigger"><span></span></div>
-                  <nav id="nav-mobile"></nav>
+                  <div id="nav-trigger"><span className={open ? 'open' : ''} onClick={ () => {
+                      setOpen(!open)
+                  }
+                  }></span></div>
+                  <nav id="nav-mobile">
+                    <ul className={open ? 'expanded' : ''} style={{display: open ? "block" : "none"}}>
+                          <li>
+                              <a href="#about"><strong>About</strong></a>
+                          </li>
+                          <li>
+                              <a href="#team"><strong>Team</strong></a>
+                          </li>
+                          <li>
+                              <a href="#gallery"><strong>Gallery</strong></a>
+                          </li>
+                          <li>
+                              <a href="#admission"><strong>Admissions</strong></a>
+                          </li>
+                          <li>
+                              <a href="#trust"><strong>TRUST</strong></a>
+                          </li>
+                          <li>
+                              <a href="#donate"><strong>DONATE</strong></a>
+                          </li>
+                          <li>
+                              <a href="#feedback"><strong>FEEDBACK</strong></a>
+                          </li>
+                      </ul>
+                  </nav>
 
               </div>
           </div>

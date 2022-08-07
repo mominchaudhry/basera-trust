@@ -1,19 +1,18 @@
-import { useEffect, useState } from 'react';
-import About from './About';
-import Admissions from './Admissions';
-import './App.css';
-import Banner from './Banner/Banner';
-import Children from './Children';
-import Donate from './Donate/Donate';
-import Feedback from './Feedback';
-import Footer from './Footer';
-import Gallery from './Gallery';
-import Shareholders from './Shareholders/Shareholders';
-import axios from 'axios';
-import VideoLinks from './VideoLinks';
+import { useEffect, useState } from "react";
+import About from "./About";
+import Admissions from "./Admissions";
+import "./App.css";
+import Banner from "./Banner/Banner";
+import Children from "./Children";
+import Donate from "./Donate/Donate";
+import Feedback from "./Feedback";
+import Footer from "./Footer";
+import Gallery from "./Gallery";
+import Shareholders from "./Shareholders/Shareholders";
+import axios from "axios";
+import VideoLinks from "./VideoLinks";
 
 function App() {
-
   const baseUrl = process.env.REACT_APP_STRAPI_URL || "http://localhost:1337";
   const [galleryImages, setGalleryImages] = useState([]);
   const [shareholders, setShareholders] = useState({});
@@ -26,117 +25,121 @@ function App() {
   const [videoHeader, setVideoHeader] = useState({});
 
   const fetchData = async () => {
+    const [
+      bannerRes,
+      aboutHeader,
+      aboutData,
+      teamHeader,
+      teamData,
+      galleryData,
+      videosHeader,
+      admissionsHeader,
+      admissionsData,
+      childrenData,
+      donateData,
+      bankData,
+      feedbackData,
+    ] = await Promise.all([
+      axios.get(baseUrl + "/api/banner"),
+      axios.get(baseUrl + "/api/about-header"),
+      axios.get(baseUrl + "/api/abouts"),
+      axios.get(baseUrl + "/api/team-header"),
+      axios.get(baseUrl + "/api/members?populate=*"),
+      axios.get(baseUrl + "/api/galleries?populate=*"),
+      axios.get(baseUrl + "/api/videos-header"),
+      axios.get(baseUrl + "/api/admissions-header"),
+      axios.get(baseUrl + "/api/admissions"),
+      axios.get(baseUrl + "/api/children"),
+      axios.get(baseUrl + "/api/donate"),
+      axios.get(baseUrl + "/api/bank-accounts"),
+      axios.get(baseUrl + "/api/feedback-header"),
+    ]);
 
-    //Get Banner content
-    let res = await axios.get(baseUrl + '/api/banner');
+    //Set Banner content
     setBanner({
-      title: res.data.data.attributes.Title,
-      subtitle: res.data.data.attributes.Subtitle,
-      button: res.data.data.attributes.button_text
+      title: bannerRes.data.data.attributes.Title,
+      subtitle: bannerRes.data.data.attributes.Subtitle,
+      button: bannerRes.data.data.attributes.button_text,
     });
 
-    //Get About content
-    res = await axios.get(baseUrl + '/api/about-header');
+    //Set About content
     let t = {
-      title: res.data.data.attributes.title,
-      header: res.data.data.attributes.header,
-      description: res.data.data.attributes.description,
-      content: []
-    }
-    res = await axios.get(baseUrl + '/api/abouts');
-    t.content = res.data.data.map(item => (
-      {
+      title: aboutHeader.data.data.attributes.title,
+      header: aboutHeader.data.data.attributes.header,
+      description: aboutHeader.data.data.attributes.description,
+      content: aboutData.data.data.map((item) => ({
         header: item.attributes.header,
-        description: item.attributes.description
-      }
-    ))
+        description: item.attributes.description,
+      })),
+    };
     setAbout(t);
 
-    //Get Team content
-    res = await axios.get(baseUrl + '/api/team-header');
+    //Set Team content
     t = {
-      title: res.data.data.attributes.title,
-      header: res.data.data.attributes.header,
-      description: res.data.data.attributes.description,
-      content: []
-    }
-    res = await axios.get(baseUrl + '/api/members?populate=*');
-    t.content = res.data.data.map((sh) => (
-      {
-        image:sh.attributes.head_image.data.attributes.url,
-        name:sh.attributes.full_name,
-        position:sh.attributes.position
-      }
-    ))
+      title: teamHeader.data.data.attributes.title,
+      header: teamHeader.data.data.attributes.header,
+      description: teamHeader.data.data.attributes.description,
+      content: teamData.data.data.map((sh) => ({
+        image: sh.attributes.head_image.data.attributes.url,
+        name: sh.attributes.full_name,
+        position: sh.attributes.position,
+      })),
+    };
     setShareholders(t);
 
-    //Get Gallery images
-    res = await axios.get(baseUrl + '/api/galleries?populate=*');
-    setGalleryImages(res.data.data.map((img) => (
-      {
-        url:img.attributes.image.data.attributes.url,
-        alt:img.attributes.description
-      }
-    )));
+    //Set Gallery images
+    setGalleryImages(
+      galleryData.data.data.map((img) => ({
+        url: img.attributes.image.data.attributes.url,
+        alt: img.attributes.description,
+      }))
+    );
 
-    //Get Videos header
-    res = await axios.get(baseUrl + '/api/videos-header');
-    console.log(res)
+    //Set Videos header
     setVideoHeader({
-      title: res.data.data.attributes.title,
-      header: res.data.data.attributes.header,
-      description: res.data.data.attributes.description,
-      results: res.data.data.attributes.number_of_results,
-      moreVideos: res.data.data.attributes.more_videos_text,
-    })
+      title: videosHeader.data.data.attributes.title,
+      header: videosHeader.data.data.attributes.header,
+      description: videosHeader.data.data.attributes.description,
+      results: videosHeader.data.data.attributes.number_of_results,
+      moreVideos: videosHeader.data.data.attributes.more_videos_text,
+    });
 
-    //Get Admissions content
-    res = await axios.get(baseUrl + '/api/admissions-header');
+    //Set Admissions content
     t = {
-      title: res.data.data.attributes.title,
-      header: res.data.data.attributes.header,
-      description: res.data.data.attributes.description,
-      content: []
-    }
-    res = await axios.get(baseUrl + '/api/admissions');
-    t.content = res.data.data.map((ad) => (
-      {
-        header:ad.attributes.header,
-        description:ad.attributes.description
-      }
-    ))
+      title: admissionsHeader.data.data.attributes.title,
+      header: admissionsHeader.data.data.attributes.header,
+      description: admissionsHeader.data.data.attributes.description,
+      content: admissionsData.data.data.map((ad) => ({
+        header: ad.attributes.header,
+        description: ad.attributes.description,
+      })),
+    };
     setAdmissions(t);
 
-    //Get Children content
-    res = await axios.get(baseUrl + '/api/children');
+    //Set Children content
     setChildren({
-      title: res.data.data.attributes.title,
-      header: res.data.data.attributes.header,
-      paragraph1: res.data.data.attributes.paragraph1,
-      paragraph2: res.data.data.attributes.paragraph2,
-      paragraph3: res.data.data.attributes.paragraph3,
-    })
+      title: childrenData.data.data.attributes.title,
+      header: childrenData.data.data.attributes.header,
+      paragraph1: childrenData.data.data.attributes.paragraph1,
+      paragraph2: childrenData.data.data.attributes.paragraph2,
+      paragraph3: childrenData.data.data.attributes.paragraph3,
+    });
 
-    //Get Donate content
-    res = await axios.get(baseUrl + '/api/donate');
+    //Set Donate content
     t = {
-      title: res.data.data.attributes.title,
-      header: res.data.data.attributes.header,
-      description: res.data.data.attributes.description,
-      quote: res.data.data.attributes.quote,
-      head_office: res.data.data.attributes.head_office,
-      phone: res.data.data.attributes.phone,
-      mobile: res.data.data.attributes.mobile,
-      email: res.data.data.attributes.email,
-      pakistan: res.data.data.attributes.pakistan,
-      Canada: res.data.data.attributes.Canada,
-      UK: res.data.data.attributes.UK,
-      NTN: res.data.data.attributes.NTN,
-      bank_accounts: []
-    }
-    res = await axios.get(baseUrl + '/api/bank-accounts');
-    t.bank_accounts = res.data.data.map((bank) => (
-      {
+      title: donateData.data.data.attributes.title,
+      header: donateData.data.data.attributes.header,
+      description: donateData.data.data.attributes.description,
+      quote: donateData.data.data.attributes.quote,
+      head_office: donateData.data.data.attributes.head_office,
+      phone: donateData.data.data.attributes.phone,
+      mobile: donateData.data.data.attributes.mobile,
+      email: donateData.data.data.attributes.email,
+      pakistan: donateData.data.data.attributes.pakistan,
+      Canada: donateData.data.data.attributes.Canada,
+      UK: donateData.data.data.attributes.UK,
+      NTN: donateData.data.data.attributes.NTN,
+      bank_accounts: bankData.data.data.map((bank) => ({
         name: bank.attributes.name,
         description: bank.attributes.description,
         address: bank.attributes.address,
@@ -145,20 +148,18 @@ function App() {
         currency: bank.attributes.currency,
         swift_code: bank.attributes.swift_code,
         IBAN: bank.attributes.IBAN,
-      }
-    ))
+      })),
+    };
     setDonate(t);
 
-    //Get Feedback content
-    res = await axios.get(baseUrl + '/api/feedback-header');
+    //Set Feedback content
     setFeedback({
-      title: res.data.data.attributes.title,
-      header: res.data.data.attributes.header,
-      phone: res.data.data.attributes.phone,
-      email: res.data.data.attributes.email
-    })
-    
-  }
+      title: feedbackData.data.data.attributes.title,
+      header: feedbackData.data.data.attributes.header,
+      phone: feedbackData.data.data.attributes.phone,
+      email: feedbackData.data.data.attributes.email,
+    });
+  };
 
   useEffect(() => {
     fetchData();
@@ -166,19 +167,19 @@ function App() {
   }, []);
 
   return (
-      <div id="wrapper" className='App'>
-        <Banner banner={banner} />        
-        <main id="content">
-            <About about={about} />
-            <Shareholders shareholders={shareholders} baseUrl={baseUrl} />
-            <Gallery images={galleryImages} baseUrl={baseUrl} />
-            <VideoLinks videoHeader={videoHeader} />
-            <Admissions admissions={admissions} />
-            <Children children={children} />
-            <Donate donate={donate} />
-            <Feedback feedback={feedback} />
-        </main>
-        <Footer />
+    <div id="wrapper" className="App">
+      <Banner banner={banner} />
+      <main id="content">
+        <About about={about} />
+        <Shareholders shareholders={shareholders} baseUrl={baseUrl} />
+        <Gallery images={galleryImages} baseUrl={baseUrl} />
+        <VideoLinks videoHeader={videoHeader} />
+        <Admissions admissions={admissions} />
+        <Children children={children} />
+        <Donate donate={donate} />
+        <Feedback feedback={feedback} />
+      </main>
+      <Footer />
     </div>
   );
 }
