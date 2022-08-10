@@ -12,6 +12,21 @@ import Shareholders from "./Shareholders/Shareholders";
 import axios from "axios";
 import VideoLinks from "./VideoLinks";
 
+const TEAM_ORDER = (position) => {
+  switch (position){
+    case "Chairman/Trustee":
+      return 0
+    case "Trustee":
+      return 1
+    case "Trustee/Project Manager":
+      return 2
+    case "Advisor":
+      return 999
+    default:
+      return 3
+  }
+}
+
 function App() {
   const baseUrl = process.env.REACT_APP_STRAPI_URL || "http://localhost:1337";
   const [galleryImages, setGalleryImages] = useState([]);
@@ -75,15 +90,22 @@ function App() {
     setAbout(t);
 
     //Set Team content
+
+    let team = teamData.data.data.map((sh) => ({
+      image: sh.attributes.head_image.data.attributes.url,
+      name: sh.attributes.full_name,
+      position: sh.attributes.position,
+    }))
+
+    team.sort((a, b) => {
+      return TEAM_ORDER(a.position) - TEAM_ORDER(b.position)
+    })
+
     t = {
       title: teamHeader.data.data.attributes.title,
       header: teamHeader.data.data.attributes.header,
       description: teamHeader.data.data.attributes.description,
-      content: teamData.data.data.map((sh) => ({
-        image: sh.attributes.head_image.data.attributes.url,
-        name: sh.attributes.full_name,
-        position: sh.attributes.position,
-      })),
+      content: team,
     };
     setShareholders(t);
 

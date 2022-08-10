@@ -89,7 +89,7 @@
 }
 
 .teamCard {
-  height: 320px;
+  height: 340px;
   width: 250px;
   margin: 10px;
   border-radius: 10px;
@@ -97,6 +97,7 @@
   flex-direction: column;
   justify-content: space-between;
   background-color: #fff;
+  padding: 20px;
 }
 
 .teamCard img {
