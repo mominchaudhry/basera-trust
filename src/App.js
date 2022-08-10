@@ -171,11 +171,11 @@ function App() {
       <Banner banner={banner} />
       <main id="content">
         <About about={about} />
-        <Shareholders shareholders={shareholders} baseUrl={baseUrl} />
+        <Children children={children} />
         <Gallery images={galleryImages} baseUrl={baseUrl} />
         <VideoLinks videoHeader={videoHeader} />
         <Admissions admissions={admissions} />
-        <Children children={children} />
+        <Shareholders shareholders={shareholders} baseUrl={baseUrl} />
         <Donate donate={donate} />
         <Feedback feedback={feedback} />
       </main>

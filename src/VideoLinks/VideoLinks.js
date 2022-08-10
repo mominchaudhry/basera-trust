@@ -25,7 +25,7 @@ function VideoLinks({videoHeader}) {
     }, [videoHeader]);
 
   return (
-    <section id="team" className="introduction scrollto secondary-color">
+    <section id="videos" className="introduction scrollto secondary-color">
         <div className="row clearfix responsive-flex">
             
             <div className="col-3">

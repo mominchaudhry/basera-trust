@@ -57,22 +57,25 @@ function Banner({banner}) {
                               <a href="#about"><strong>About</strong></a>
                           </li>
                           <li>
-                              <a href="#team"><strong>Team</strong></a>
+                              <a href="#trust"><strong>Children</strong></a>
                           </li>
                           <li>
                               <a href="#gallery"><strong>Gallery</strong></a>
                           </li>
                           <li>
+                              <a href="#videos"><strong>Videos</strong></a>
+                          </li>
+                          <li>
                               <a href="#admission"><strong>Admissions</strong></a>
                           </li>
                           <li>
-                              <a href="#trust"><strong>TRUST</strong></a>
+                              <a href="#team"><strong>Team</strong></a>
                           </li>
                           <li>
-                              <a href="#donate"><strong>DONATE</strong></a>
+                              <a href="#donate"><strong>Donate</strong></a>
                           </li>
                           <li>
-                              <a href="#feedback"><strong>FEEDBACK</strong></a>
+                              <a href="#feedback"><strong>Feedback</strong></a>
                           </li>
                       </ul>
                   </nav>
@@ -87,22 +90,25 @@ function Banner({banner}) {
                               <a href="#about"><strong>About</strong></a>
                           </li>
                           <li>
-                              <a href="#team"><strong>Team</strong></a>
+                              <a href="#trust"><strong>Children</strong></a>
                           </li>
                           <li>
                               <a href="#gallery"><strong>Gallery</strong></a>
                           </li>
                           <li>
+                              <a href="#videos"><strong>Videos</strong></a>
+                          </li>
+                          <li>
                               <a href="#admission"><strong>Admissions</strong></a>
                           </li>
                           <li>
-                              <a href="#trust"><strong>TRUST</strong></a>
+                              <a href="#team"><strong>Team</strong></a>
                           </li>
                           <li>
-                              <a href="#donate"><strong>DONATE</strong></a>
+                              <a href="#donate"><strong>Donate</strong></a>
                           </li>
                           <li>
-                              <a href="#feedback"><strong>FEEDBACK</strong></a>
+                              <a href="#feedback"><strong>Feedback</strong></a>
                           </li>
                       </ul>
                   </nav>
