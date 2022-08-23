@@ -72,6 +72,9 @@ function Banner({banner}) {
                               <a href="#team"><strong>Team</strong></a>
                           </li>
                           <li>
+                              <a href="#construction"><strong>Construction</strong></a>
+                          </li>
+                          <li>
                               <a href="#donate"><strong>Donate</strong></a>
                           </li>
                           <li>
@@ -103,6 +106,9 @@ function Banner({banner}) {
                           </li>
                           <li>
                               <a href="#team"><strong>Team</strong></a>
+                          </li>
+                          <li>
+                              <a href="#construction"><strong>Construction</strong></a>
                           </li>
                           <li>
                               <a href="#donate"><strong>Donate</strong></a>

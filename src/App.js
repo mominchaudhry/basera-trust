@@ -8,22 +8,23 @@ import Donate from "./Donate/Donate";
 import Feedback from "./Feedback";
 import Footer from "./Footer";
 import Gallery from "./Gallery";
-import Shareholders from "./Shareholders/Shareholders";
+import Shareholders from "./Shareholders";
 import axios from "axios";
 import VideoLinks from "./VideoLinks";
+import Construction from "./Construction";
 
 const TEAM_ORDER = (position) => {
   switch (position){
     case "Chairman/Trustee":
       return 0
-    case "Trustee":
-      return 1
     case "Trustee/Project Manager":
+      return 1
+    case "Trustee":
       return 2
     case "Advisor":
       return 999
     default:
-      return 3
+      return 500
   }
 }
 
@@ -38,6 +39,7 @@ function App() {
   const [donate, setDonate] = useState({});
   const [feedback, setFeedback] = useState({});
   const [videoHeader, setVideoHeader] = useState({});
+  const [constructionData, setConstructionData] = useState({});
 
   const fetchData = async () => {
     const [
@@ -54,6 +56,8 @@ function App() {
       donateData,
       bankData,
       feedbackData,
+      constructionHeader,
+      constructionItems
     ] = await Promise.all([
       axios.get(baseUrl + "/api/banner"),
       axios.get(baseUrl + "/api/about-header"),
@@ -68,6 +72,8 @@ function App() {
       axios.get(baseUrl + "/api/donate"),
       axios.get(baseUrl + "/api/bank-accounts"),
       axios.get(baseUrl + "/api/feedback-header"),
+      axios.get(baseUrl + "/api/construction-heading"),
+      axios.get(baseUrl + "/api/construction-items?populate=*")
     ]);
 
     //Set Banner content
@@ -181,6 +187,18 @@ function App() {
       phone: feedbackData.data.data.attributes.phone,
       email: feedbackData.data.data.attributes.email,
     });
+    console.log(constructionItems)
+
+    //Set Construction content
+    setConstructionData({
+      title: constructionHeader.data.data.attributes.title,
+      header: constructionHeader.data.data.attributes.header,
+      description: constructionHeader.data.data.attributes.description,
+      content: constructionItems.data.data.map((item) => ({
+        url: item.attributes.image.data.attributes.url,
+        caption: item.attributes.caption,
+      }))
+    })
   };
 
   useEffect(() => {
@@ -188,18 +206,30 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
+  const sections = [
+    <About about={about} />,
+    <Children children={children} />,
+    <Gallery images={galleryImages}/>,
+    <VideoLinks videoHeader={videoHeader} />,
+    <Admissions admissions={admissions} />,
+    <Shareholders shareholders={shareholders} baseUrl={baseUrl} />,
+    <Construction content={constructionData}/>,
+    <Donate donate={donate} />,
+    <Feedback feedback={feedback} />
+  ]
+
   return (
     <div id="wrapper" className="App">
       <Banner banner={banner} />
       <main id="content">
-        <About about={about} />
-        <Children children={children} />
-        <Gallery images={galleryImages} baseUrl={baseUrl} />
-        <VideoLinks videoHeader={videoHeader} />
-        <Admissions admissions={admissions} />
-        <Shareholders shareholders={shareholders} baseUrl={baseUrl} />
-        <Donate donate={donate} />
-        <Feedback feedback={feedback} />
+        {sections.map((section, idx) => {
+          if (idx%2===1){
+            return <div key={idx} className='secondary-color'>
+              {section}
+            </div>
+          }
+          return section;
+        })}
       </main>
       <Footer />
     </div>

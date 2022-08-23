@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function Shareholders({shareholders, baseUrl}) {
+function Shareholders({shareholders}) {
+
+    const [threshold, setThreshold] = useState(6);
+
   return (
-    <section id="team" className="introduction scrollto secondary-color">
+    <section id="team" className="introduction scrollto">
         <div className="row clearfix">
             
             <div className="col-3">
@@ -20,7 +23,7 @@ function Shareholders({shareholders, baseUrl}) {
 
                 {shareholders?.content &&
                     shareholders.content.map((shareholder, index) => (
-                        <div key={index} className="col-2 icon-block icon-top wow fadeInUp teamCard" data-wow-delay="0.1s">
+                        index < threshold && <div key={index} className="col-2 icon-block icon-top wow fadeInUp teamCard" data-wow-delay="0.1s">
                             <div className="img-icon">
                                 <img className='headshot-image' src={shareholder.image} alt={shareholder.name}/>
                             </div>
@@ -31,9 +34,19 @@ function Shareholders({shareholders, baseUrl}) {
                         </div>
                     ))
                 }
-                
             </div>
-
+            <div className='col-3'></div>
+            <div className='see-more'>
+                {// eslint-disable-next-line
+                }<a onClick={() => {
+                        if (threshold >= shareholders.content.length) {
+                            setThreshold(6);
+                        } else {
+                            setThreshold(shareholders.content.length);
+                        }
+                    }}
+                >{threshold < shareholders.content?.length ? 'See More' : 'See Less'}</a>
+            </div>
         </div>
     </section>
   )

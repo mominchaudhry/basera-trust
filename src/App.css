@@ -88,7 +88,22 @@
   flex-wrap: wrap;
 }
 
+.update-item {
+  padding: 5px !important;
+}
+
+.see-more {
+  display: flex;
+  cursor: pointer;
+}
+
+.see-more a {
+  margin: auto;
+  margin-top: 30px;
+}
+
 .teamCard {
+  transition: 0.5s;
   height: 340px;
   width: 250px;
   margin: 10px;
@@ -98,6 +113,15 @@
   justify-content: space-between;
   background-color: #fff;
   padding: 20px;
+}
+
+.construction-section {
+  padding-bottom: 10px;
+}
+
+.teamCard:hover {
+  transition: 0.3s;
+  box-shadow: 0px 0px 10px  #888888;
 }
 
 .teamCard img {
@@ -114,6 +138,14 @@
 
   .shareholders {
     width: 100%;
+  }
+
+  .see-more {
+    width: 100%;
+  }
+
+  .see-more a {
+    margin-top: 0px;
   }
 
   .responsive-flex {

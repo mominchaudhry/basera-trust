@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Gallery({images, baseUrl}) {
+function Gallery({images}) {
 
   return (
       <aside id="gallery" className="row text-center scrollto clearfix" data-featherlight-gallery data-featherlight-filter="a">

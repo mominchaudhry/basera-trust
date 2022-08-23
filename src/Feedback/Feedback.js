@@ -2,7 +2,7 @@ import React from 'react'
 
 function Feedback({feedback}) {
   return (
-    <section id="feedback" className="secondary-color text-center scrollto clearfix">
+    <section id="feedback" className="text-center scrollto clearfix">
             <div className="row clearfix">
 
                 <div className="col-1">

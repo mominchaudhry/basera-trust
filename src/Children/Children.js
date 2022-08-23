@@ -2,7 +2,7 @@ import React from 'react'
 
 function Children({children}) {
   return (
-    <section id="trust" className="text-center scrollto clearfix secondary-color">
+    <section id="trust" className="text-center scrollto clearfix">
       <div className="row clearfix">
           <div className="col-1">
 

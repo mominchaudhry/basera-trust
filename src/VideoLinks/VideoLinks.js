@@ -19,13 +19,13 @@ function VideoLinks({videoHeader}) {
     }
 
     useEffect(() => {
-        if (videoHeader)
+        if (videoHeader.results)
             fetchVideos();
         // eslint-disable-next-line
     }, [videoHeader]);
 
   return (
-    <section id="videos" className="introduction scrollto secondary-color">
+    <section id="videos" className="introduction scrollto">
         <div className="row clearfix responsive-flex">
             
             <div className="col-3">
@@ -57,7 +57,11 @@ function VideoLinks({videoHeader}) {
 
         </div>
         <div className='youtube-link'>
-            <a href="https://www.youtube.com/channel/UCbZZQ-jGAGSDVQTPJnbEGfQ">{videoHeader.moreVideos}</a>
+            <a href="https://www.youtube.com/channel/UCbZZQ-jGAGSDVQTPJnbEGfQ">
+                <p>
+                    {videoHeader.moreVideos}
+                </p>
+            </a>
         </div>
     </section>
   )
