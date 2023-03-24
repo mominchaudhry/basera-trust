@@ -79,17 +79,15 @@ function Donate({ donate }) {
               <hr className="w100" />
             </div>
           ))}
-        <div className="donate-button">
-          <strong>
-            USA Donors: <a href="https://i-care-america.org/charity/basera/">iCare Fund America</a>
-          </strong>
-        </div>
-        <div className="donate-button">
-          <strong>
-            Canada Donors: <a href="https://www.canadahelps.org/en/dn/74910?v2=true">Children of Hope</a>
-          </strong>
-        </div>
-
+        {donate.donors &&
+          donate.donors.map((donor, index) => (
+            <div key={index} className="donate-button">
+              <strong>
+                {`${donor.title} `}
+                <a href={donor.link}>{donor.link_text}</a>
+              </strong>
+            </div>
+          ))}
         <a
           target="_blank"
           rel="noreferrer"

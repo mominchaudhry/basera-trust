@@ -54,6 +54,7 @@ function App() {
       admissionsData,
       childrenData,
       donateData,
+      donors,
       bankData,
       feedbackData,
       constructionHeader,
@@ -70,6 +71,7 @@ function App() {
       axios.get(baseUrl + "/api/admissions"),
       axios.get(baseUrl + "/api/children"),
       axios.get(baseUrl + "/api/donate"),
+      axios.get(baseUrl + "/api/donors"),
       axios.get(baseUrl + "/api/bank-accounts"),
       axios.get(baseUrl + "/api/feedback-header"),
       axios.get(baseUrl + "/api/construction-heading"),
@@ -98,7 +100,7 @@ function App() {
     //Set Team content
 
     let team = teamData.data.data.map((sh) => ({
-      image: sh.attributes.head_image.data.attributes.url,
+      image: sh.attributes.head_image.data?.attributes.url,
       name: sh.attributes.full_name,
       position: sh.attributes.position,
     }))
@@ -176,6 +178,11 @@ function App() {
         currency: bank.attributes.currency,
         swift_code: bank.attributes.swift_code,
         IBAN: bank.attributes.IBAN,
+      })),
+      donors: donors.data.data.map((donor) => ({
+        title: donor.attributes.title,
+        link: donor.attributes.link,
+        link_text: donor.attributes.link_text,
       })),
     };
     setDonate(t);
