@@ -92,6 +92,11 @@
   padding: 5px !important;
 }
 
+.donate-button {
+  font-size: x-large;
+  padding-bottom: 15px !important;
+}
+
 .see-more {
   display: flex;
   cursor: pointer;
