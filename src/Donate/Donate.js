@@ -81,12 +81,12 @@ function Donate({ donate }) {
           ))}
         <div className="donate-button">
           <strong>
-            USA Donors: <a href="https://i-care-america.org/charity/basera/">Donate Now</a>
+            USA Donors: <a href="https://i-care-america.org/charity/basera/">iCare Fund America</a>
           </strong>
         </div>
         <div className="donate-button">
           <strong>
-            Canada Donors: <a href="https://www.canadahelps.org/en/dn/74910?v2=true">Donate Now</a>
+            Canada Donors: <a href="https://www.canadahelps.org/en/dn/74910?v2=true">Children of Hope</a>
           </strong>
         </div>
 
