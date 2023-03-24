@@ -15,11 +15,6 @@ function Donate({ donate }) {
           <h2 className="section-title">{donate.header}</h2>
           <p className="section-subtitle">{donate.description}</p>
         </div>
-        <div className="donate-button">
-          <strong>
-            <a href="https://i-care-america.org/charity/basera/">Donate Now</a>
-          </strong>
-        </div>
         <div className="contact-info">
           <p>
             <strong>Head Office:</strong> {donate.head_office}
@@ -84,6 +79,16 @@ function Donate({ donate }) {
               <hr className="w100" />
             </div>
           ))}
+        <div className="donate-button">
+          <strong>
+            USA Donors: <a href="https://i-care-america.org/charity/basera/">Donate Now</a>
+          </strong>
+        </div>
+        <div className="donate-button">
+          <strong>
+            Canada Donors: <a href="https://www.canadahelps.org/en/dn/74910?v2=true">Donate Now</a>
+          </strong>
+        </div>
 
         <a
           target="_blank"
