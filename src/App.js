@@ -13,21 +13,6 @@ import axios from "axios";
 import VideoLinks from "./VideoLinks";
 import Construction from "./Construction";
 
-const TEAM_ORDER = (position) => {
-  switch (position){
-    case "Chairman/Trustee":
-      return 0
-    case "Trustee/Project Manager":
-      return 1
-    case "Trustee":
-      return 2
-    case "Advisor":
-      return 999
-    default:
-      return 500
-  }
-}
-
 function App() {
   const baseUrl = process.env.REACT_APP_STRAPI_URL || "http://localhost:1337";
   const [galleryImages, setGalleryImages] = useState([]);
@@ -103,10 +88,11 @@ function App() {
       image: sh.attributes.head_image.data?.attributes.url,
       name: sh.attributes.full_name,
       position: sh.attributes.position,
+      ranking: sh.attributes.ranking,
     }))
 
     team.sort((a, b) => {
-      return TEAM_ORDER(a.position) - TEAM_ORDER(b.position)
+      return a.ranking - b.ranking
     })
 
     t = {
