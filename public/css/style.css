@@ -764,6 +764,7 @@ h6 {
 .section-subtitle {
     font-size: 18px;
     padding-top: 0;
+    white-space: pre-wrap;
 }
 
 .section-heading h3 {
