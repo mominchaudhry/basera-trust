@@ -88,7 +88,7 @@ function App() {
       image: sh.attributes.head_image.data?.attributes.url,
       name: sh.attributes.full_name,
       position: sh.attributes.position,
-      ranking: sh.attributes.ranking,
+      ranking: sh.attributes.ranking || 500,
     }))
 
     team.sort((a, b) => {
