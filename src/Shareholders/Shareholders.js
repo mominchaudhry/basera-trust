@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 
 function Shareholders({shareholders}) {
 
-    const [threshold, setThreshold] = useState(6);
+    const LIMIT = 9;
+
+    const [threshold, setThreshold] = useState(LIMIT);
 
   return (
     <section id="team" className="introduction scrollto">
@@ -40,7 +42,7 @@ function Shareholders({shareholders}) {
                 {// eslint-disable-next-line
                 }<a onClick={() => {
                         if (threshold >= shareholders.content.length) {
-                            setThreshold(6);
+                            setThreshold(LIMIT);
                         } else {
                             setThreshold(shareholders.content.length);
                         }
