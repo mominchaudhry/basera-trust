@@ -1,4 +1,5 @@
 import React from 'react'
+import {ABOUT_CONTENT_TYPE_LIST} from '../App';
 
 function About({about}) {
   return (
@@ -21,7 +22,20 @@ function About({about}) {
                         <div className="icon"/>
                         <div className="icon-block-description">
                             <h4>{item.header}</h4>
-                            <p>{item.description}</p>
+                            {
+                                item.type === ABOUT_CONTENT_TYPE_LIST ?
+                                    <ul>
+                                        {item.content.map((li, i) => (
+                                            <li key={index}>
+                                                {
+                                                    li.hyperlink ? <a href={li.hyperlink}>{li.text}</a> : li.text
+                                                }
+                                            </li>
+                                        ))}
+                                    </ul>
+                                :
+                                    <p>{item.content}</p>
+                            }
                         </div>
                     </div>
                 ))}

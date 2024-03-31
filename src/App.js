@@ -13,6 +13,9 @@ import axios from "axios";
 import VideoLinks from "./VideoLinks";
 import Construction from "./Construction";
 
+export const ABOUT_CONTENT_TYPE_DESCRIPTION = 'about-content.description';
+export const ABOUT_CONTENT_TYPE_LIST = 'about-content.list';
+
 function App() {
   const baseUrl = process.env.REACT_APP_STRAPI_URL || "http://localhost:1337";
   const [galleryImages, setGalleryImages] = useState([]);
@@ -47,7 +50,7 @@ function App() {
     ] = await Promise.all([
       axios.get(baseUrl + "/api/banner"),
       axios.get(baseUrl + "/api/about-header"),
-      axios.get(baseUrl + "/api/abouts"),
+      axios.get(baseUrl + "/api/abouts?populate=deep"),
       axios.get(baseUrl + "/api/team-header"),
       axios.get(baseUrl + "/api/members?populate=*"),
       axios.get(baseUrl + "/api/galleries?populate=*"),
@@ -70,15 +73,35 @@ function App() {
       button: bannerRes.data.data.attributes.button_text,
     });
 
+    console.log(aboutData);
+
     //Set About content
     let t = {
       title: aboutHeader.data.data.attributes.title,
       header: aboutHeader.data.data.attributes.header,
       description: aboutHeader.data.data.attributes.description,
-      content: aboutData.data.data.map((item) => ({
-        header: item.attributes.header,
-        description: item.attributes.description,
-      })),
+      content: aboutData.data.data.map((item) => {
+        const content = item.attributes.Content[0];
+        const ret = {
+          header: item.attributes.header,
+        };
+        switch (content.__component) {
+          case ABOUT_CONTENT_TYPE_DESCRIPTION:
+            return {
+              ...ret,
+              type: ABOUT_CONTENT_TYPE_DESCRIPTION,
+              content: content.text
+            }
+          case ABOUT_CONTENT_TYPE_LIST:
+            return {
+              ...ret,
+              type: ABOUT_CONTENT_TYPE_LIST,
+              content: content.list_item,
+            }
+          default:
+            return {}
+        }
+      }),
     };
     setAbout(t);
 
