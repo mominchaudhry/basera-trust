@@ -211,8 +211,8 @@ function App() {
       header: constructionHeader.data.data.attributes.header,
       description: constructionHeader.data.data.attributes.description,
       content: constructionItems.data.data.map((item) => ({
-        url: item.attributes.image.data.attributes.url,
-        caption: item.attributes.caption,
+        url: item?.attributes.image.data?.attributes.url ?? 'images/logo.png',
+        caption: item?.attributes.caption,
       }))
     })
   };
