@@ -67,6 +67,28 @@
   margin: 5px 25px 5px 25px;
 }
 
+.App footer#landing-footer {
+  padding-bottom: 28px;
+}
+
+.footer-verification-row {
+  padding-top: 16px !important;
+  padding-bottom: 0 !important;
+}
+
+.footer-verification {
+  padding-top: 0;
+  text-align: left;
+}
+
+.footer-verification p {
+  margin: 0;
+  padding: 18px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
 .video-container {
   display: flex;
   flex-wrap: wrap;
