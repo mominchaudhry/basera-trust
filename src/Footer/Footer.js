@@ -78,12 +78,29 @@ function Footer() {
 
       <div className="row clearfix footer-verification-row">
         <div className="col-1 footer-verification">
-          <p>
-            <strong>Official domain notice:</strong> Basera Trust owns and
-            operates baseratrust.org. This website is the official website of
-            Basera Trust and the domain is used for the organization&apos;s
-            website and email services.
-          </p>
+          <div className="footer-verification-card">
+            <p>
+              <strong>Official domain notice:</strong> Basera Trust owns and
+              operates baseratrust.org. This website is the official website of
+              Basera Trust and the domain is used for the organization&apos;s
+              website, verification, and email services.
+            </p>
+
+            <div className="footer-verification-documents">
+              <span className="footer-verification-title">
+                Verification documents
+              </span>
+              <a
+                className="footer-verification-link"
+                target="_blank"
+                rel="noreferrer"
+                href={`${process.env.PUBLIC_URL}/documents/basera-charity-registration-certificate.pdf`}
+              >
+                <i className="fa fa-file-pdf-o" aria-hidden="true"></i>
+                <span>Charity Registration Certificate (PDF)</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
